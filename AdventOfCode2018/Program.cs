@@ -12,7 +12,7 @@ namespace AdventOfCode2018
     {
         static void Main(string[] args)
         {
-            var day = new Day00();
+            var day = new Day2016_01();
             day.Run();
 
             Console.ReadKey();

@@ -2,7 +2,7 @@ using AdventOfCode2018.Days;
 using NUnit.Framework;
 using System.IO;
 
-namespace Tests
+namespace AdventOfCode2018.Test
 {
     public class Day00Test
     {
