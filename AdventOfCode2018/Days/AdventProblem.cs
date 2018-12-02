@@ -25,19 +25,33 @@ namespace AdventOfCode2018.Days
             sw.Stop();
             Console.WriteLine($"Input file parsed in {sw.ElapsedMilliseconds} ms");
 
-            Console.WriteLine("Running part 1...");
-            sw.Restart();
-            var part1Output = Part1(input);
-            sw.Stop();
-            Console.WriteLine($"Part 1 finished in {sw.ElapsedMilliseconds} ms");
-            Console.WriteLine($"    Result: {part1Output}");
+            try
+            {
+                Console.WriteLine("Running part 1...");
+                sw.Restart();
+                var part1Output = Part1(input);
+                sw.Stop();
+                Console.WriteLine($"    Finished in {sw.ElapsedMilliseconds} ms");
+                Console.WriteLine($"    Result: {part1Output}");
+            }
+            catch (NotImplementedException)
+            {
+                Console.WriteLine("Part 1 not yet implemented");
+            }
 
-            Console.WriteLine("Running part 2...");
-            sw.Restart();
-            var part2Output = Part2(input);
-            sw.Stop();
-            Console.WriteLine($"Part 2 finished in {sw.ElapsedMilliseconds} ms");
-            Console.WriteLine($"    Result: {part2Output}");
+            try
+            {
+                Console.WriteLine("Running part 2...");
+                sw.Restart();
+                var part2Output = Part2(input);
+                sw.Stop();
+                Console.WriteLine($"    Finished in {sw.ElapsedMilliseconds} ms");
+                Console.WriteLine($"    Result: {part2Output}");
+            }
+            catch (NotImplementedException)
+            {
+                Console.WriteLine("Part 2 not yet implemented");
+            }
         }
 
         public abstract TPart1Output Part1(TInput parsed);
