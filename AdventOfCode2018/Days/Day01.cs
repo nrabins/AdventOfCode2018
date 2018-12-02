@@ -7,23 +7,19 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2018.Days
 {
-	public class Day01 : AdventProblem
+	public class Day01 : AdventProblem<string, int>
 	{
-		public void Run()
-		{
-			var inputRaw = File.ReadAllLines("Inputs/Day01.txt");
-			var commaDelimitedInput = string.Join(", ", inputRaw);
-			
-			var output1 = Part1(commaDelimitedInput);
-			Console.WriteLine("Part 1: " + output1);
+	    protected override string InputFilePath => "Inputs/Day01.txt";
 
-			var output2 = Part2(commaDelimitedInput);
-			Console.WriteLine("Part 2: " + output2);
-		}
+	    protected override string ParseInputFile()
+	    {
+	        var inputRaw = File.ReadAllLines(InputFilePath);
+	        return string.Join(", ", inputRaw);
+	    }
 
-		public int Part1(string input)
+		public override int Part1(string input)
 		{
-			var instructions = input.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+			var instructions = input.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
 
 			var sum = 0;
 			foreach (var instruction in instructions)
@@ -37,9 +33,9 @@ namespace AdventOfCode2018.Days
 			return sum;
 		}
 
-		public int Part2(string input)
+		public override int Part2(string input)
 		{
-			var instructions = input.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+			var instructions = input.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
 
 			var sum = 0;
 			var visited = new List<int> { sum };

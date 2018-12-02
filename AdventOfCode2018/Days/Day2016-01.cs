@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2018.Days
 {
-	public class Day2016_01 : AdventProblem
+	public class Day2016_01 : AdventProblem<string, int>
 	{
-		public void Run()
-		{
-			var input = File.ReadAllText("Inputs/Day2016-01.txt");
-			var part1output = Part1(input);
-			Console.WriteLine("Part 1: " + part1output);
+	    protected override string InputFilePath => "Inputs/Day2016-01.txt";
 
-			var part2output = Part2(input);
-			Console.WriteLine("Part 2: " + part2output);
-		}
+	    protected override string ParseInputFile()
+	    {
+	        return File.ReadAllText(InputFilePath);
+	    }
 
-		public int Part1(string input) 
+		public override int Part1(string input) 
 		{
 			var x = 0;
 			var y = 0;
@@ -57,7 +54,7 @@ namespace AdventOfCode2018.Days
 			return Math.Abs(x) + Math.Abs(y);
 		}
 
-		public int Part2(string input)
+		public override int Part2(string input)
 		{
 			var x = 0;
 			var y = 0;
@@ -113,7 +110,7 @@ namespace AdventOfCode2018.Days
 
 		private string[] ParseInstructions(string input)
 		{
-			return input.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+			return input.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
 		}
 	}
 }

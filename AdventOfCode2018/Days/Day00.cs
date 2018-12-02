@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2018.Days
 {
-    public class Day00 : AdventProblem
+    public class Day00 : AdventProblem<string, int>
     {
-        public void Run()
+        protected override string InputFilePath => "Inputs/Day00.txt";
+
+        protected override string ParseInputFile()
         {
-            var input = File.ReadAllText("Inputs/Day00.txt");
-            var part1output = Part1(input);
-            var part2output = Part2(input);
+            throw new NotImplementedException();
         }
 
-        public int Part1(string input)
+
+        public override int Part1(string input)
         {
             var sum = 0;
             for (int i = 0; i < input.Length; i++)
@@ -30,7 +31,7 @@ namespace AdventOfCode2018.Days
             return sum;
         }
 
-        public int Part2(string input)
+        public override int Part2(string input)
         {
             throw new NotImplementedException();
         }
