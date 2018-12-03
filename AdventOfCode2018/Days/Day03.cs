@@ -39,7 +39,7 @@ namespace AdventOfCode2018
             {
                 for (int y = 0; y <= bounds.yMax; y++)
                 {
-                    if (field[x, y] > 1)
+                    if (field[x, y] >= 2)
                         overlappingCellCount++;
                 }
             }
@@ -64,10 +64,10 @@ namespace AdventOfCode2018
         {
             return new Bounds
             {
-                xMin = claims.Aggregate(int.MaxValue, (min, claim) => claim.x < min ? claim.x : min),
-                xMax = claims.Aggregate(int.MinValue, (max, claim) => claim.right > max ? claim.right : max),
-                yMin = claims.Aggregate(int.MaxValue, (min, claim) => claim.y < min ? claim.y : min),
-                yMax = claims.Aggregate(int.MinValue, (max, claim) => claim.bottom > max ? claim.bottom : max),
+                xMin = claims.Min(claim => claim.x),
+                xMax = claims.Max(claim => claim.right),
+                yMin = claims.Min(claim => claim.y),
+                yMax = claims.Max(claim => claim.bottom),
             };
         }
     }
@@ -103,11 +103,10 @@ namespace AdventOfCode2018
                 id = digits[0],
                 x = digits[1],
                 y = digits[2],
-                height = digits[3],
-                width = digits[4],
+                width = digits[3],
+                height = digits[4],
             };
         }
-
     }
 
 }

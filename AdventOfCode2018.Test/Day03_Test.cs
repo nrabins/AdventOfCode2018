@@ -34,10 +34,11 @@ namespace AdventOfCode2018.Test
                 yield return new ParseClaimTestCase("#1 @ 1,3: 4x4", new Claim(1, 1, 3, 4, 4));
                 yield return new ParseClaimTestCase("#2 @ 3,1: 4x4", new Claim(2, 3, 1, 4, 4));
                 yield return new ParseClaimTestCase("#3 @ 5,5: 2x2", new Claim(3, 5, 5, 2, 2));
+                yield return new ParseClaimTestCase("#4 @ 0,0: 1x2", new Claim(4, 0, 0, 1, 2));
             }
         }
 
-        [ TestCaseSource(nameof(ParseClaimTestCases))]
+        [TestCaseSource(nameof(ParseClaimTestCases))]
         public void Claim_Parse(ParseClaimTestCase testCase)
         {
             var parsedClaim = Claim.Parse(testCase.Input);
@@ -82,7 +83,7 @@ namespace AdventOfCode2018.Test
         }
 
         [Test]
-        public void Part1()
+        public void Part1_Example()
         {
             var claims = new[]
             {
@@ -93,5 +94,28 @@ namespace AdventOfCode2018.Test
             Assert.AreEqual(4, Day.Part1(claims));
         }
 
-    }
+        [Test]
+        public void Part1_No_Overlap()
+        {
+            var claims = new[]
+            {
+                new Claim(1, 0, 0, 1, 1),
+                new Claim(2, 1, 0, 1, 1),
+            };
+            Assert.AreEqual(0, Day.Part1(claims));
+        }
+
+        [Test]
+        public void Part1_Single_Cell_Twice()
+        {
+            var claims = new[]
+            {
+                new Claim(1, 0, 0, 1, 1),
+                new Claim(2, 0, 0, 1, 1),
+            };
+            Assert.AreEqual(1, Day.Part1(claims));
+        }
+
+
+}
 }
