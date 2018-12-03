@@ -61,7 +61,6 @@ namespace AdventOfCode2018.Days
             return "";
         }
 
-
         public int CountCommonCharacters(string a, string b)
         {
             if (a.Length != b.Length)
@@ -76,7 +75,6 @@ namespace AdventOfCode2018.Days
 
             return commonCount;
         }
-
 
         public string FindCommonCharacters(string a, string b)
         {
