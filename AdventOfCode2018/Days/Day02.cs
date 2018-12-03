@@ -48,7 +48,7 @@ namespace AdventOfCode2018.Days
         {
             for (int i = 0; i < parsed.Length - 1; i++)
             {
-                for (int j = 0; j < parsed.Length; j++)
+                for (int j = i+1; j < parsed.Length; j++)
                 {
                     if (i == j)
                         continue;
