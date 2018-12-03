@@ -15,6 +15,7 @@ namespace AdventOfCode2018
             var day = new Day03();
             day.Run();
 
+            Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
     }

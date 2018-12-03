@@ -83,6 +83,36 @@ namespace AdventOfCode2018.Test
         }
 
         [Test]
+        public void GetField()
+        {
+            var claims = new[]
+            {
+                new Claim(1, 1, 3, 4, 4),
+                new Claim(2, 3, 1, 4, 4),
+                new Claim(3, 5, 5, 2, 2),
+            };
+            var bounds = new Bounds
+            {
+                xMin = 1,
+                xMax = 6,
+                yMin = 1,
+                yMax = 6,
+            };
+            var expectedField = new[,]
+            {
+                {0, 0, 0, 0, 0, 0, 0,},
+                {0, 0, 0, 1, 1, 1, 1,},
+                {0, 0, 0, 1, 1, 1, 1,},
+                {0, 1, 1, 2, 2, 1, 1,},
+                {0, 1, 1, 2, 2, 1, 1,},
+                {0, 1, 1, 1, 1, 1, 1,},
+                {0, 1, 1, 1, 1, 1, 1,},
+            };
+            var actualField = Day.GetField(bounds, claims);
+            Assert.AreEqual(expectedField, actualField);
+        }
+
+        [Test]
         public void Part1_Example()
         {
             var claims = new[]
@@ -114,6 +144,48 @@ namespace AdventOfCode2018.Test
                 new Claim(2, 0, 0, 1, 1),
             };
             Assert.AreEqual(1, Day.Part1(claims));
+        }
+
+        public class ClaimSharingTest
+        {
+            public int[,] Field { get; set; }
+            public Claim Claim { get; set; }
+            public bool Expected { get; set; }
+
+            public ClaimSharingTest(int[,] field, Claim claim, bool expected)
+            {
+                Field = field;
+                Claim = claim;
+                Expected = expected;
+            }
+        }
+
+        public static IEnumerable<ClaimSharingTest> ClaimSharingTests
+        {
+            get
+            {
+                yield return new ClaimSharingTest(new[,] { { 1, 1, 1 } }, new Claim(1, 0, 0, 1, 1), false);
+                yield return new ClaimSharingTest(new[,] { { 2, 1, 1 } }, new Claim(1, 0, 0, 1, 1), true);
+            }
+        }
+
+        [TestCaseSource(nameof(ClaimSharingTests))]
+        public void IsClaimSharing(ClaimSharingTest testCase)
+        {
+            var result = Day.IsClaimSharing(testCase.Field, testCase.Claim);
+            Assert.AreEqual(testCase.Expected, result);
+        }
+
+        [Test]
+        public void Part2()
+        {
+            var claims = new[]
+            {
+                new Claim(1, 1, 3, 4, 4),
+                new Claim(2, 3, 1, 4, 4),
+                new Claim(3, 5, 5, 2, 2),
+            };
+            Assert.AreEqual(3, Day.Part2(claims));
         }
 
 

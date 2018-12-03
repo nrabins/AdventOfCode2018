@@ -21,18 +21,7 @@ namespace AdventOfCode2018
         public override int Part1(Claim[] claims)
         {
             var bounds = Bounds.GetBounds(claims);
-            var field = new int[bounds.xMax+1, bounds.yMax+1];
-
-            foreach (var claim in claims)
-            {
-                for (int x = claim.x; x <= claim.right; x++)
-                {
-                    for (int y = claim.y; y <= claim.bottom; y++)
-                    {
-                        field[x, y]++;
-                    }
-                }
-            }
+            var field = GetField(bounds, claims);
 
             var overlappingCellCount = 0;
             for (int x = 0; x <= bounds.xMax; x++)
@@ -46,12 +35,54 @@ namespace AdventOfCode2018
             return overlappingCellCount;
         }
 
-        public override int Part2(Claim[] parsed)
+        public override int Part2(Claim[] claims)
         {
-            throw new System.NotImplementedException();
+            var bounds = Bounds.GetBounds(claims);
+            var field = GetField(bounds, claims);
+
+            foreach (var claim in claims)
+            {
+                if (!IsClaimSharing(field, claim))
+                    return claim.id;
+            }
+
+            throw new ArgumentException("No claim found that does not share");
+        }
+
+        public bool IsClaimSharing(int[,] field, Claim claim)
+        {
+            for (var x = claim.x; x <= claim.right; x++)
+            {
+                for (var y = claim.y; y <= claim.bottom; y++)
+                {
+                    if (field[x, y] != 1)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public int[,] GetField(Bounds bounds, Claim[] claims)
+        {
+            var field = new int[bounds.xMax + 1, bounds.yMax + 1];
+
+            foreach (var claim in claims)
+            {
+                for (int x = claim.x; x <= claim.right; x++)
+                {
+                    for (int y = claim.y; y <= claim.bottom; y++)
+                    {
+                        field[x, y]++;
+                    }
+                }
+            }
+
+            return field;
         }
     }
-
 
     public struct Bounds
     {

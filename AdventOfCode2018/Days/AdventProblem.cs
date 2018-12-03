@@ -23,7 +23,7 @@ namespace AdventOfCode2018.Days
             sw.Start();
             var input = ParseInputFile();
             sw.Stop();
-            Console.WriteLine($"Input file parsed in {sw.ElapsedMilliseconds} ms");
+            Console.WriteLine($"    Parsed in {sw.ElapsedMilliseconds} ms");
 
             try
             {
@@ -36,7 +36,7 @@ namespace AdventOfCode2018.Days
             }
             catch (NotImplementedException)
             {
-                Console.WriteLine("Part 1 not yet implemented");
+                Console.WriteLine("    Part 1 not yet implemented");
             }
 
             try
@@ -50,7 +50,7 @@ namespace AdventOfCode2018.Days
             }
             catch (NotImplementedException)
             {
-                Console.WriteLine("Part 2 not yet implemented");
+                Console.WriteLine("    Part 2 not yet implemented");
             }
         }
 
