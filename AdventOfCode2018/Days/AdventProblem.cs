@@ -9,7 +9,6 @@ namespace AdventOfCode2018.Days
     public abstract class AdventProblem<TInput, TPart1Output, TPart2Output>
     {
         protected abstract string InputFilePath { get; }
-
         protected abstract TInput ParseInputFile();
         
 
