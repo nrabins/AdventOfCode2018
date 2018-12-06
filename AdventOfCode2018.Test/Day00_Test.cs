@@ -4,7 +4,7 @@ using System.IO;
 
 namespace AdventOfCode2018.Test
 {
-    public class Day00Test
+    public class Day00_Test
     {
         public Day00 Day { get; set; }
 
