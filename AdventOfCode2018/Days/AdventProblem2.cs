@@ -6,13 +6,12 @@ using System.IO;
 
 namespace AdventOfCode2018.Days
 {
-    public abstract class AdventProblem<TRawInput, TPartInput, TPart1Output, TPart2Output>
+    public abstract class AdventProblem2<TRawInput, TPartInput, TPart1Output, TPart2Output>
     {
         protected abstract string InputFilePath { get; }
         
 		protected abstract TPartInput ParseInputFile();
-
-		protected abstract TPartInput Parse(TRawInput input);
+        public abstract TPartInput Parse(TRawInput input);
         
 
         public void Run()
@@ -56,11 +55,11 @@ namespace AdventOfCode2018.Days
             }
         }
 
-        public abstract TPart1Output Part1(TInput parsed);
-        public abstract TPart2Output Part2(TInput parsed);
+        public abstract TPart1Output Part1(TPartInput parsed);
+        public abstract TPart2Output Part2(TPartInput parsed);
     }
 
-    public abstract class AdventProblem<TInput, TOutput> : AdventProblem<TInput, TOutput, TOutput>
+    public abstract class AdventProblem2<TRawInput, TPartInput, TOutput> : AdventProblem2<TRawInput, TPartInput, TOutput, TOutput>
     {
     }
 }
