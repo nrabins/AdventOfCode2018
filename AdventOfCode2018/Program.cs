@@ -12,7 +12,7 @@ namespace AdventOfCode2018
     {
         static void Main(string[] args)
         {
-            var day = new Day08();
+            var day = new Day09();
             day.Run();
 
             Console.WriteLine("Press any key to exit...");
