@@ -29,14 +29,14 @@ namespace AdventOfCode2018.Test
 	        "Step F must be finished before step E can begin.",
 	    };
 
-	    private Dictionary<char, Node> TestInputNodes => new Dictionary<char, Node>
+	    private Dictionary<char, Day07Node> TestInputNodes => new Dictionary<char, Day07Node>
 	    {
-	        {'A', new Node('A', new HashSet<char>(new List<char>{'C'}), new HashSet<char>(new List<char> {'B', 'D'}), 1)},
-	        {'B', new Node('B', new HashSet<char>(new List<char>{'A'}), new HashSet<char>(new List<char> {'E'}), 2)},
-	        {'C', new Node('C', new HashSet<char>(new List<char>{}), new HashSet<char>(new List<char> {'A', 'F'}), 3)},
-	        {'D', new Node('D', new HashSet<char>(new List<char>{'A'}), new HashSet<char>(new List<char> {'E'}), 4)},
-	        {'E', new Node('E', new HashSet<char>(new List<char>{'B', 'D', 'F'}), new HashSet<char>(new List<char> {}), 5)},
-	        {'F', new Node('F', new HashSet<char>(new List<char>{'C'}), new HashSet<char>(new List<char> {'E'}), 6)},
+	        {'A', new Day07Node('A', new HashSet<char>(new List<char>{'C'}), new HashSet<char>(new List<char> {'B', 'D'}), 1)},
+	        {'B', new Day07Node('B', new HashSet<char>(new List<char>{'A'}), new HashSet<char>(new List<char> {'E'}), 2)},
+	        {'C', new Day07Node('C', new HashSet<char>(new List<char>{}), new HashSet<char>(new List<char> {'A', 'F'}), 3)},
+	        {'D', new Day07Node('D', new HashSet<char>(new List<char>{'A'}), new HashSet<char>(new List<char> {'E'}), 4)},
+	        {'E', new Day07Node('E', new HashSet<char>(new List<char>{'B', 'D', 'F'}), new HashSet<char>(new List<char> {}), 5)},
+	        {'F', new Day07Node('F', new HashSet<char>(new List<char>{'C'}), new HashSet<char>(new List<char> {'E'}), 6)},
 	    };
 
 	    [Test]
@@ -50,7 +50,7 @@ namespace AdventOfCode2018.Test
 	            areEqual = true;
 	            foreach (var pair in parsed)
 	            {
-	                Node value;
+	                Day07Node value;
 	                if (TestInputNodes.TryGetValue(pair.Key, out value))
 	                {
 	                    // Require value be equal.

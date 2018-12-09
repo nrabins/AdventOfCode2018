@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2018.Days
 {
-    public class Day07 : AdventProblem2<string[], Dictionary<char, Node>, string, int>
+    public class Day07 : AdventProblem2<string[], Dictionary<char, Day07Node>, string, int>
     {
         protected override string InputFilePath => "Inputs/Day07.txt";
-        protected override Dictionary<char, Node> ParseInputFile()
+        protected override Dictionary<char, Day07Node> ParseInputFile()
         {
             return Parse(File.ReadAllLines(InputFilePath));
         }
 
         public bool Testing { get; set; }
 
-        public override Dictionary<char, Node> Parse(string[] input)
+        public override Dictionary<char, Day07Node> Parse(string[] input)
         {
-            var dict = new Dictionary<char, Node>();
+            var dict = new Dictionary<char, Day07Node>();
             var reg = new Regex(@"^Step (\D) must be finished before step (\D) can begin\.");
 
             foreach (var line in input)
@@ -29,9 +29,9 @@ namespace AdventOfCode2018.Days
                 var child = reg.Match(line).Groups[2].Value[0];
 
                 if (!dict.ContainsKey(parent))
-                    dict[parent] = new Node(parent, Testing);
+                    dict[parent] = new Day07Node(parent, Testing);
                 if (!dict.ContainsKey(child))
-                    dict[child] = new Node(child, Testing);
+                    dict[child] = new Day07Node(child, Testing);
 
                 dict[parent].Children.Add(child);
                 dict[child].Parents.Add(parent);
@@ -40,16 +40,16 @@ namespace AdventOfCode2018.Days
             return dict;
         }
 
-        public override string Part1(Dictionary<char, Node> parsed)
+        public override string Part1(Dictionary<char, Day07Node> parsed)
         {
             var map = parsed.ToDictionary(pair => pair.Key,
-                                        pair => (Node)pair.Value.Clone());
+                                        pair => (Day07Node)pair.Value.Clone());
 
             var start = map.First(pair => pair.Value.Parents.Count == 0);
 
             start.Value.State = NodeState.Complete;
 
-            var visited = new List<Node> {start.Value};
+            var visited = new List<Day07Node> {start.Value};
             
             var loopsLeft = 10000;
             while (loopsLeft > 0 && map.Any(pair => pair.Value.State != NodeState.Complete))
@@ -73,7 +73,7 @@ namespace AdventOfCode2018.Days
             return string.Join("", visited.Select(node => node.Name));
         }
 
-        public override int Part2(Dictionary<char, Node> parsed)
+        public override int Part2(Dictionary<char, Day07Node> parsed)
         {
             var numWorkers = Testing ? 2 : 4;
 
@@ -81,7 +81,7 @@ namespace AdventOfCode2018.Days
 
 
             var map = parsed.ToDictionary(pair => pair.Key,
-                                          pair => (Node)pair.Value.Clone());
+                                          pair => (Day07Node)pair.Value.Clone());
 
 
             var tick = 0;
@@ -124,7 +124,7 @@ namespace AdventOfCode2018.Days
         }
     }
 
-    public class Node : IEquatable<Node>, ICloneable
+    public class Day07Node : IEquatable<Day07Node>, ICloneable
     {
         public char Name { get; set; }
         public NodeState State { get; set; }
@@ -132,11 +132,11 @@ namespace AdventOfCode2018.Days
         public HashSet<char> Children { get; set; }
         public int TimeToComplete { get; set; }
 
-        public Node()
+        public Day07Node()
         {
         }
 
-        public Node(char name, bool Testing)
+        public Day07Node(char name, bool Testing)
         {
             Name = name;
             State = NodeState.Unready;
@@ -145,7 +145,7 @@ namespace AdventOfCode2018.Days
             TimeToComplete = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(name) + 1 + (Testing ? 0 : 60);
         }
 
-        public Node(char name, HashSet<char> parents, HashSet<char> children, int timeToComplete)
+        public Day07Node(char name, HashSet<char> parents, HashSet<char> children, int timeToComplete)
         {
             Name = name;
             State = NodeState.Unready;
@@ -156,10 +156,10 @@ namespace AdventOfCode2018.Days
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Node);
+            return Equals(obj as Day07Node);
         }
 
-        public bool Equals(Node other)
+        public bool Equals(Day07Node other)
         {
             return other != null &&
                    Name == other.Name &&
@@ -182,7 +182,7 @@ namespace AdventOfCode2018.Days
 
         public object Clone()
         {
-            var clone = new Node();
+            var clone = new Day07Node();
             clone.Name = Name;
             clone.State = State;
             clone.Parents = new HashSet<char>(Parents);
