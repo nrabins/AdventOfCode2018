@@ -63,8 +63,10 @@
     <Compile Include="Days\Day08.cs" />
     <Compile Include="Days\Day09.cs" />
     <Compile Include="Days\Day10.cs" />
+    <Compile Include="Days\Day11.cs" />
     <Compile Include="Days\Day2016-01.cs" />
     <Compile Include="Utility\LinkedListExtensions.cs" />
+    <Compile Include="Utility\MathUtils.cs" />
     <Content Include="Inputs\Day06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -104,6 +106,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\Day10.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Inputs\Day11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\Day2016-01.txt">
