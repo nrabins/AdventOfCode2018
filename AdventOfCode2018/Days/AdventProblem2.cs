@@ -40,6 +40,12 @@ namespace AdventOfCode2018.Days
                 Console.WriteLine("    Part 1 not yet implemented");
             }
 
+            Console.WriteLine("Parsing input file...");
+            sw.Start();
+            input = ParseInputFile();
+            sw.Stop();
+            Console.WriteLine($"    Parsed in {sw.ElapsedMilliseconds} ms");
+
             try
             {
                 Console.WriteLine("Running part 2...");
