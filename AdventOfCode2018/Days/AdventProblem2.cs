@@ -17,6 +17,7 @@ namespace AdventOfCode2018.Days
         public void Run()
         {
             Console.WriteLine("Running program...");
+            Console.WriteLine("");
 
             var sw = new Stopwatch();
 
@@ -39,6 +40,9 @@ namespace AdventOfCode2018.Days
             {
                 Console.WriteLine("    Part 1 not yet implemented");
             }
+
+            Console.WriteLine("");
+            Console.WriteLine("");
 
             Console.WriteLine("Parsing input file...");
             sw.Start();
