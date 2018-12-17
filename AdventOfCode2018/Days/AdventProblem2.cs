@@ -6,13 +6,18 @@ using System.IO;
 
 namespace AdventOfCode2018.Days
 {
-    public abstract class AdventProblem2<TRawInput, TPartInput, TPart1Output, TPart2Output>
+    public abstract class AdventProblem2<TRawInput, TPart1Input, TPart1Output, TPart2Input, TPart2Output>
     {
         protected abstract string InputFilePath { get; }
         
-		protected abstract TPartInput ParseInputFile();
-        public abstract TPartInput Parse(TRawInput input);
-        
+		protected abstract TPart1Input Part1ParseInputFile();
+        protected abstract TPart2Input Part2ParseInputFile();
+
+        public abstract TPart1Input Part1Parse(TRawInput rawInput);
+        public abstract TPart2Input Part2Parse(TRawInput rawInput);
+
+        public abstract TPart1Output Part1(TPart1Input input);
+        public abstract TPart2Output Part2(TPart2Input input);
 
         public void Run()
         {
@@ -23,7 +28,7 @@ namespace AdventOfCode2018.Days
 
             Console.WriteLine("Parsing input file...");
             sw.Start();
-            var input = ParseInputFile();
+            var part1Input = Part1ParseInputFile();
             sw.Stop();
             Console.WriteLine($"    Parsed in {sw.ElapsedMilliseconds} ms");
 
@@ -31,7 +36,7 @@ namespace AdventOfCode2018.Days
             {
                 Console.WriteLine("Running part 1...");
                 sw.Restart();
-                var part1Output = Part1(input);
+                var part1Output = Part1(part1Input);
                 sw.Stop();
                 Console.WriteLine($"    Finished in {sw.ElapsedMilliseconds} ms");
                 Console.WriteLine($"    Result: {part1Output}");
@@ -45,8 +50,8 @@ namespace AdventOfCode2018.Days
             Console.WriteLine("");
 
             Console.WriteLine("Parsing input file...");
-            sw.Start();
-            input = ParseInputFile();
+            sw.Restart();
+            var part2Input = Part2ParseInputFile();
             sw.Stop();
             Console.WriteLine($"    Parsed in {sw.ElapsedMilliseconds} ms");
 
@@ -54,7 +59,7 @@ namespace AdventOfCode2018.Days
             {
                 Console.WriteLine("Running part 2...");
                 sw.Restart();
-                var part2Output = Part2(input);
+                var part2Output = Part2(part2Input);
                 sw.Stop();
                 Console.WriteLine($"    Finished in {sw.ElapsedMilliseconds} ms");
                 Console.WriteLine($"    Result: {part2Output}");
@@ -64,12 +69,44 @@ namespace AdventOfCode2018.Days
                 Console.WriteLine("    Part 2 not yet implemented");
             }
         }
-
-        public abstract TPart1Output Part1(TPartInput parsed);
-        public abstract TPart2Output Part2(TPartInput parsed);
     }
 
-    public abstract class AdventProblem2<TRawInput, TPartInput, TOutput> : AdventProblem2<TRawInput, TPartInput, TOutput, TOutput>
+    /// <summary>
+    /// Helper subclass for when Part1 and Part2 have the same input type
+    /// </summary>
+    public abstract class AdventProblem2<TRawInput, TPartInput, TPart1Output, TPart2Output>
+        : AdventProblem2<TRawInput, TPartInput, TPart1Output, TPartInput, TPart2Output>
+    {
+        protected override TPartInput Part1ParseInputFile()
+        {
+            return ParseInputFile();
+        }
+
+        protected override TPartInput Part2ParseInputFile()
+        {
+            return ParseInputFile();
+        }
+
+        protected abstract TPartInput ParseInputFile();
+
+        public override TPartInput Part1Parse(TRawInput rawInput)
+        {
+            return Parse(rawInput);
+        }
+
+        public override TPartInput Part2Parse(TRawInput rawInput)
+        {
+            return Parse(rawInput);
+        }
+
+        public abstract TPartInput Parse(TRawInput input);
+    }
+
+    /// <summary>
+    /// Helper subclass for then Part1 and Part2 have the same input and output types
+    /// </summary>
+    public abstract class AdventProblem2<TRawInput, TInput, TOutput> 
+        : AdventProblem2<TRawInput, TInput, TOutput, TOutput>
     {
     }
 }

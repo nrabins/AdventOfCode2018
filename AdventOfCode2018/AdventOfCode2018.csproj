@@ -67,6 +67,7 @@
     <Compile Include="Days\Day12.cs" />
     <Compile Include="Days\Day13.cs" />
     <Compile Include="Days\Day2016-01.cs" />
+    <Compile Include="Days\Day14.cs" />
     <Compile Include="Utility\DictionaryUtils.cs" />
     <Compile Include="Utility\EnumUtils.cs" />
     <Compile Include="Utility\LinkedListExtensions.cs" />
@@ -119,6 +120,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\Day13.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Inputs\Day14.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\Day2016-01.txt">
